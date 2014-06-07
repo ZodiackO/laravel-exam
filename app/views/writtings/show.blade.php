@@ -1,0 +1,1 @@
+C:\xampp\htdocs\laravel-exam\app/views/writtings/show.blade.php
