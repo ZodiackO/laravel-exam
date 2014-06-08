@@ -16,6 +16,8 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+	Route::resource('command','CommandsController');
+
 	Route::get('choice/create/',array(
 		'as' => 'choice-create',
 		'uses' => 'ChoicesController@create'

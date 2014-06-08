@@ -11,7 +11,8 @@ class CommandsController extends \BaseController {
 	{
 		$commands = Command::all();
 
-		return View::make('commands.index', compact('commands'));
+		//return View::make('commands.index', compact('commands'));
+		return $commands;
 	}
 
 	/**
@@ -38,10 +39,12 @@ class CommandsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		//return $data;
 		Command::create($data);
-
-		return Redirect::route('commands.index');
+		$commands = Command::all();
+		//return $commands->toJson();
+		return $commands;
+		//return Redirect::route('commands.index');
 	}
 
 	/**
@@ -66,8 +69,8 @@ class CommandsController extends \BaseController {
 	public function edit($id)
 	{
 		$command = Command::find($id);
-
-		return View::make('commands.edit', compact('command'));
+		return $command;
+		//return View::make('commands.edit', compact('command'));
 	}
 
 	/**
@@ -88,8 +91,10 @@ class CommandsController extends \BaseController {
 		}
 
 		$command->update($data);
+		$commands = Command::all();
 
-		return Redirect::route('commands.index');
+		return $commands;
+		//return Redirect::route('commands.index');
 	}
 
 	/**
@@ -101,8 +106,10 @@ class CommandsController extends \BaseController {
 	public function destroy($id)
 	{
 		Command::destroy($id);
-
-		return Redirect::route('commands.index');
+		$commands = Command::all();
+		//return $commands->toJson();
+		return $commands;
+		//return Redirect::route('commands.index');
 	}
 
 }
