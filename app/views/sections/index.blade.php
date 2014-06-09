@@ -44,7 +44,7 @@
 							<tr>
 								<td></td>
 								<td>ข้อ {{$m_question->number}}</td>
-								<td>{{$m_question->wquestion}}</td>
+								<td>{{$m_question->question}}</td>
 								<td>({{$m_question->score}} คะแนน)</td>
 								<td>ระดับ{{$m_question->level}}</td>
 								<td>

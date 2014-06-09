@@ -17,7 +17,7 @@
 					<div class="form-group">
 	             	<label class="col-lg-1 control-label">คำถาม</label>
 		             	<div class="col-lg-8">
-		             		{{Form::textarea('wquestion',null, array('class' => 'form-control input-sm','id'=>'editor1'))}}
+		             		{{Form::textarea('question',null, array('class' => 'form-control input-sm','id'=>'editor1'))}}
 
 		             	</div>
 	             	</div><!--From group-->

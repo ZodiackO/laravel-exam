@@ -6,7 +6,7 @@ class ChoicesController extends \BaseController {
 	 * Display a listing of choices
 	 *
 	 * @return Response
-	 */
+	 */ 
 	public function index()
 	{
 		$choices = Choice::all();
@@ -31,6 +31,25 @@ class ChoicesController extends \BaseController {
 	 */
 	public function store()
 	{
+		$tex = Input::get('text');
+		$number = Input::get('number');
+
+		$exid = Input::get('exid');
+		$secid = Input::get('secid');
+
+		$exam = Examination::where('exid', '=', $exid)->first();
+		$totalscore = $exam->score;
+
+		$currscore = WrittingsController::checkscore($exid);
+		$sum_score = $currscore + Input::get('score');
+		$remain_score = $totalscore - $currscore;
+		if($sum_score > $totalscore){
+			//$over_score = $sum_score - $totalscore;
+			return Redirect::back()
+						->with('message', 'คะแนนเต็ม: '.$totalscore.'  ปัจจุบันมีคะแนน: '.$currscore.'  คุณสามารถใส่คะแนนได้ไม่เกิน: '.$remain_score)
+						->withInput();
+		}
+
 		$validator = Validator::make($data = Input::all(), Choice::$rules);
 
 		if ($validator->fails())
@@ -38,9 +57,27 @@ class ChoicesController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		Choice::create($data);
+		//Choice::create($data);
+		$numquest = DB::table('section')
+			->join('sectionhasquestion', 'section.secid', '=', 'sectionhasquestion.secid')
+			->join('question', 'sectionhasquestion.qid', '=', 'question.qid')
+			->where('section.exid', '=', $exid)
+			->orderBy('question.number','desc')
+			->first();
 
-		return Redirect::route('choices.index');
+		$numquest = $numquest ? $numquest->number + 1 : 1;
+		//return $numquest;
+
+		$quest = Question::create(array('question' => Input::get('question'), 'score' => Input::get('score'),'level' => Input::get('level') , 'number' => $numquest));
+		$choic = Choice::create(array('answer' => Input::get('answer'),'reason' => Input::get('reason') ,'qid' => $quest->qid));
+		for($i=0; $i < sizeof($number); $i++){
+			Selection::create(array('text' => $tex[$i], 'number' => $number[$i], 'cid' => $choic->cid));
+		}
+		
+
+		$sechasquest = Sectionhasquestion::create(array('secid' => $secid, 'qid' => $quest->qid));
+
+		return Redirect::to('section/'.$exid.'/');
 	}
 
 	/**

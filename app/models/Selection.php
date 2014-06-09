@@ -1,10 +1,10 @@
 <?php
 
-class Choice extends \Eloquent {
+class Selection extends \Eloquent {
 
 	// Add your validation rules here
-	protected $table = 'choice';
-	protected $primaryKey = 'cid';
+	protected $table = 'selection';
+	protected $primaryKey = 'selectid';
 	public static $rules = [
 		// 'title' => 'required'
 	];

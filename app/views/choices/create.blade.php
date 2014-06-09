@@ -17,21 +17,42 @@
 					<div class="form-group">
 	             	<label class="col-lg-1 control-label">คำถาม</label>
 		             	<div class="col-lg-8">
-		             		{{Form::textarea('wquestion',null, array('class' => 'form-control input-sm','id'=>'editor1'))}}
+		             		{{Form::textarea('question',null, array('class' => 'form-control input-sm','id'=>'editor1'))}}
 
 		             	</div>
 	             	</div><!--From group-->
 
+	             	<div class="form-group">
 	             	<label class="col-lg-1 control-label">จำนวนตัวเลือก</label>
 		             	<div class="col-lg-8">
-		             		{{Form::select('level',array('2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'),null,array('class'=>'form-control'))}}
+		             		{{Form::select('sel',array('2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'),null,array('class'=>'form-control', 'id'=>'level'))}}
 
 		             	</div>
 	             	</div><!--From group-->
 
+	             	<div class="form-group">
+		             	<div class="panel-body" id="reply">
+		             		<div class="form-group">
+			    				<label class="col-lg-1 control-label">ตัวเลือกที่1</label>
+			    				<div class="col-lg-8">
+			    					<input name="text[]" type="text" class="form-control input-sm"/>
+			    					<input type="hidden" name="number[]" value="1" >
+			    				</div>
+			    			</div>
+			    			<div class="form-group">
+			    				<label class="col-lg-1 control-label">ตัวเลือกที่2</label>
+			    				<div class="col-lg-8">
+			    					<input name="text[]" type="text" class="form-control input-sm"/>
+			    					<input type="hidden" name="number[]" value="2" >
+			    				</div>
+			    			</div>
+			    		</div>
+	             	</div>
+
+	             	<div class="form-group">
 	             	<label class="col-lg-1 control-label">ข้อที่ถูกต้อง</label>
 		             	<div class="col-lg-8">
-		             		{{Form::select('answer',array('2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'),null,array('class'=>'form-control'))}}
+		             		{{Form::select('answer',array('1'=>'1','2'=>'2'),null,array('class'=>'form-control', 'id'=>'answer'))}}
 
 		             	</div>
 	             	</div><!--From group-->
@@ -46,7 +67,7 @@
 	             	<div class="form-group">
 	             		<label class="col-lg-1 control-label">เหตุผล</label>
 		             	<div class="col-lg-8">
-		             		{{Form::textarea('answer', null, array('class' => 'form-control input-sm','size'=>'x2'))}}
+		             		{{Form::textarea('reason', null, array('class' => 'form-control input-sm','size'=>'x2'))}}
 		             	</div>
 	             	</div><!--From group-->
 	             	<div class="form-group">
@@ -73,6 +94,73 @@
 			toolbar: 'Basic'
 		});
 	</script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+		function numoption(){
+			var num = 0;
+			$("select#answer option").each(function(){
+		    	num++;
+
+		    });
+		    return num;
+		}
+
+		$( "select#level" ).change(function() {
+		    var str = "";
+		    var currsel = $(this).val();
+		    var numsel = numoption();
+			
+		    if(currsel > numsel){
+		    	var diff = currsel - numsel;
+
+		    	console.log("low: "+diff);
+		    	for (var i = numsel; i < currsel; i++) {
+		    		var ntpoint = i+1;
+		    		$("select#answer")
+		    			.append($("<option></option>")
+		    			.attr("value", ntpoint)
+		    			.text(ntpoint));
+
+		    		$("div#reply").append(
+		    			'<div class="form-group" id="ans'+(ntpoint)+'">'+
+		    				'<label class="col-lg-1 control-label">ตัวเลือกที่'+(ntpoint)+'</label>'+
+		    				'<div class="col-lg-8">'+
+		    					'<input name="text[]" type="text" class="form-control input-sm"/>'+
+		    					'<input type="hidden" name="number[]" value="'+(ntpoint)+'" >'+
+		    				'</div>'+
+		    			'</div>'
+		    		);
+
+		    	};
+
+
+		    }
+		    else if(currsel < numsel){
+		    	var diff = numsel - currsel;
+		    	var point = currsel;
+
+		    	console.log("high");
+
+		    	for (var i = 0; i < diff; i++) {
+		    		point++;
+		    		$("select#answer option[value='"+point+"']").remove();
+
+		    		$("div#ans"+point+"").remove();		
+		    	};
+		    }
+		    /*
+		    $( "select option:selected" ).each(function() {
+		      str += $( this ).text() + " ";
+		    });*/
+
+		    //$( "div" ).text( str );
+
+		}).change();
+	});
+	</script>
+
 
 
 @if ($errors->any())

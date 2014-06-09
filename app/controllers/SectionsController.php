@@ -9,6 +9,7 @@ class SectionsController extends \BaseController {
 	 */
 	public function index($exam)
 	{
+
 		//$sections = Section::all();
 		$sections = Section::where('exid', '=', $exam)->get();
 
@@ -20,7 +21,8 @@ class SectionsController extends \BaseController {
 		$m_questions = DB::table('section')
 			->join('sectionhasquestion', 'section.secid', '=', 'sectionhasquestion.secid')
 			->join('question', 'sectionhasquestion.qid', '=', 'question.qid')
-			->join('writting', 'question.qid', '=', 'writting.qid')
+			//->join('writting', 'question.qid', '=', 'writting.qid')
+			//->join('choice', 'question.qid', '=', 'choice.qid')
 			->where('section.exid', '=', $exam)
 			->get();
 

@@ -65,9 +65,8 @@ class WrittingsController extends \BaseController {
 		$numquest = $numquest ? $numquest->number + 1 : 1;
 		//return $numquest;
 
-		$quest = Question::create(array('score' => Input::get('score'),'level' => Input::get('level') , 'number' => $numquest));
-		Writting::create(array('wquestion' => Input::get('wquestion'),'answer' => Input::get('answer'),'numline' => Input::get('numline') ,'qid' => $quest->qid));
-
+		$quest = Question::create(array('question' => Input::get('question'), 'score' => Input::get('score'),'level' => Input::get('level') , 'number' => $numquest));
+		Writting::create(array('answer' => Input::get('answer'),'numline' => Input::get('numline') ,'qid' => $quest->qid));
 		$sechasquest = Sectionhasquestion::create(array('secid' => $secid, 'qid' => $quest->qid));
 
 		return Redirect::to('section/'.$exid.'/');
@@ -154,7 +153,7 @@ class WrittingsController extends \BaseController {
 		//return $array;
 	}
 
-	public function checkscore($exid){
+	public static function checkscore($exid){
 		//$scores = Question::where('exid', '=',$exid)->get();
 		$scores = DB::table('section')
 			->join('sectionhasquestion', 'section.secid', '=', 'sectionhasquestion.secid')
