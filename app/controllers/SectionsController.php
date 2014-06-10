@@ -60,9 +60,20 @@ class SectionsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+/*
+		$numsec = DB::table('section')
+			->join('sectionhasquestion', 'section.secid', '=', 'sectionhasquestion.secid')
+			->join('question', 'sectionhasquestion.qid', '=', 'question.qid')
+			->where('section.exid', '=', $exid)
+			->orderBy('question.number','desc')
+			->first();*/
+		$numsec = Section::where('exid','=',$exid)
+			->orderBy('number', 'desc')
+			->first();
 
+		$numsec = $numsec ? $numsec->number + 1 : 1;
 
-		Section::create($data);
+		Section::create(array('name' => Input::get('name'), 'exid'=> $exid, 'number' => $numsec));
 
 		return Redirect::to('section/'.$exid.'/');
 	}
@@ -125,23 +136,73 @@ class SectionsController extends \BaseController {
 		$section = Section::find($id);
 
 		$shq = Sectionhasquestion::where('secid', '=', $id)->get();
+
 		foreach ($shq as $ashq) {
 			$wid = Writting::where('qid', '=', $ashq->qid)->first();
-			Writting::destroy($wid->wid);
+			$choice = Choice::where('qid', '=', $ashq->qid)->first();
+			$wid = $wid ? Writting::destroy($wid->wid) : '';
+			if($choice){
+				$selects = Selection::where('cid', '=', $choice->cid)->get();
+				foreach($selects as $select){
+					Sectionhasquestion::destroy($select->selectid);
+				}
+				Choice::destroy($choice->cid);
+			}
+
 			Sectionhasquestion::destroy($ashq->shqid);
 			
 			Question::destroy($ashq->qid);
 		}
 
-		//$qid = Question::where()->first();
-		//$wid = Writting::where('qid', '=', $id)->first();
-		
-		//Question::destroy($id);
-		//Sectionhasquestion::destroy($shq->shqid);
+		/*
+		$wid_arr = array();
+		$shq_arr = array();
+		$quest_arr = array();
+		$choice_arr = array();
+		$select_arr = array();
+		foreach($shq as $ashq){
+			$writing = Writting::where('qid', '=', $ashq->qid)->first();
+			$choice = Choice::where('qid', '=', $ashq->qid)->first();
+			if($choice){
+				$selects = Selection::where('cid', '=', $choice->cid)->get();
+				foreach($selects as $select){
+					array_push($select_arr,$select->selectid);
+				}
+				array_push($choice_arr, $choice->cid);
+			}elseif ($writing) {
+				array_push($wid_arr, $ashq->qid);
+			}
+			
+			array_push($shq_arr, $ashq->shqid);
+			array_push($quest_arr, $ashq->qid);
+		}
+		//return $select_arr;
+		Selection::whereIn('selectid', $select_arr)->delete();
+		Choice::whereIn('cid', $choice_arr)->delete();
+		Writting::whereIn('wid', $wid_arr)->delete();
+		Sectionhasquestion::whereIn('shqid', $shq_arr)->delete();
+		Question::whereIn('qid', $quest_arr)->delete();
+*/
 		Section::destroy($id);
 
 		return Redirect::to('section/'.$section->exid);
 	}
 
+	public static function sumScoresection($idsec)
+	{
+		//$sections = Sectionhasquestion::where('secid', '=', $idsec)->get();
+
+		$sections = DB::table('section')
+			->join('sectionhasquestion', 'section.secid', '=', 'sectionhasquestion.secid')
+			->join('question', 'sectionhasquestion.qid', '=', 'question.qid')
+			->where('section.secid', '=', $idsec)
+			->get();
+
+		$total = 0;
+		foreach ($sections as $section){
+			$total += $section->score;
+		}
+		return $total;
+	}
 
 }

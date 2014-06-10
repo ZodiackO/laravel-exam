@@ -20,7 +20,7 @@
 							<tr>
 								<td width="700">
 									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" id="collapses" href="#collapse{{$section->secid}}">
-										ตอนที่ {{$section->number}} : {{$section->name}} 
+										ตอนที่ {{$section->number}} : {{$section->name}} ({{SectionsController::sumScoresection($section->secid)}} คะแนน)
 									</a>
 								</td>
 								<td>
