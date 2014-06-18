@@ -87,6 +87,10 @@
     font-weight: 600;
 }
 
+.gmnoprint img    {
+	max-width: none;
+}
+
 .avatar {
     width: 60px;   
 }
@@ -111,7 +115,7 @@
     color:#ccc;
     margin-right: 20px;
     text-shadow: 0 1px 0 #fff;
-    .transition(all 0.2s ease);
+    .transition(color 0.2s ease);
     
     .shortcut-icon  {
         position: relative;
@@ -146,7 +150,7 @@
     &:hover {
         text-decoration: none;
         color: #626262;
-        .transition(all 0.2s ease);
+        .transition(color 0.2s ease);
     }
 }
 
@@ -232,7 +236,7 @@
     min-height: 800px;
     padding-top: @topnav-height;
     margin-left: @sidebar-width;
-    .transition(all 0.5s ease);
+    //.transition(all 0.5s ease);
     
     @media (max-width: 480px) {
         min-width: 310px;

@@ -10,7 +10,7 @@
             #top-nav    {
                 .brand  {
                     width: @mini-sidebar-width;
-                    .transition(all 0.5s ease);
+                    //.transition(all 0.5s ease);
                     
                     .text-toggle    {
                         display: none;   
@@ -65,6 +65,10 @@
                                     .submenu    {
                                         display: block;   
                                         .animation(fadeIn 0.4s ease);
+                                        
+                                        &.third-level, &.fourth-level   {
+                                            display: none;   
+                                        }
                                     }
                                 }
                                 
@@ -113,6 +117,17 @@
                                     background-clip: padding-box;
                                     
                                     li  {
+                                        position: relative;
+                                        
+                                        &:hover {
+                                            .submenu    {
+                                                &.third-level  {
+                                                    display: block;   
+                                                    .animation(fadeIn 0.4s ease);
+                                                }
+                                            }
+                                        }
+                                        
                                         a   {
                                             background: #fff;
                                             text-align: left;
@@ -131,6 +146,19 @@
                                             }
                                         }
                                     }
+                                    
+                                    &.third-level  {
+                                        li  {
+                                            &:hover {
+                                                .submenu    {
+                                                    &.fourth-level  {
+                                                        display: block;   
+                                                        .animation(fadeIn 0.4s ease);
+                                                    }
+                                                }
+                                            }  
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -143,7 +171,7 @@
             }
             #main-container ,footer {
                 margin-left: @mini-sidebar-width;   
-                .transition(all 0.5s ease);
+                //.transition(all 0.5s ease);
             }
         }
     }
@@ -152,7 +180,7 @@
         @media (max-width: 767px) {
             aside   {
                 left: 0;   
-                .transition(all 0.5s ease);
+                //.transition(all 0.5s ease);
             }
             
             #top-nav   {
@@ -163,7 +191,21 @@
             #main-container ,footer {
                 left: @sidebar-width;   
                 right: -@sidebar-width;   
-                .transition(all 0.5s ease);
+                //.transition(all 0.5s ease);
+            }
+        }
+    }
+    
+    &.sidebar-hide {
+        @media (min-width: 768px) {
+            aside   {
+                left: -@sidebar-width;   
+                //.transition(all 0.5s ease);
+            }   
+            
+            #main-container ,footer {
+                margin-left: 0;
+                //.transition(all 0.5s ease);
             }
         }
     }

@@ -11,7 +11,12 @@ class SectionsController extends \BaseController {
 	{
 
 		//$sections = Section::all();
+
 		$sections = Section::where('exid', '=', $exam)->get();
+		$course = DB::table('examination')
+			->join('course', 'examination.courseid', '=', 'course.courseid')
+			->where('examination.exid', '=', $exam)
+			->first();
 
 /*		
 		$m_questions = DB::table('question')
@@ -32,7 +37,7 @@ class SectionsController extends \BaseController {
 		$score = $question->checkscore($exam);
 		$totalscore = Examination::find($exam)->score;
 
-		return View::make('sections.index', compact(array('sections','exam', 'score','totalscore', 'm_questions')));
+		return View::make('sections.index', compact(array('sections','exam', 'score','totalscore', 'm_questions', 'course')));
 	}
 
 	/**
@@ -76,6 +81,31 @@ class SectionsController extends \BaseController {
 		Section::create(array('name' => Input::get('name'), 'exid'=> $exid, 'number' => $numsec));
 
 		return Redirect::to('section/'.$exid.'/');
+	}
+
+	public function storem()
+	{
+		$exid = Input::get('exid');
+		//$data = Input::get('data');
+
+		//return $tes;
+		$validator = Validator::make($data = Input::all(), Section::$rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator)->withInput();
+		}
+
+		$numsec = Section::where('exid','=',$exid)
+			->orderBy('number', 'desc')
+			->first();
+
+		$numsec = $numsec ? $numsec->number + 1 : 1;
+
+		Section::create(array('name' => Input::get('name'), 'exid'=> $exid, 'number' => $numsec));
+		$sections = Section::where('exid', '=', $exid)->get();
+
+		return $sections;
 	}
 
 	/**

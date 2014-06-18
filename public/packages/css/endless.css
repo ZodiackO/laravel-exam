@@ -6,11 +6,6 @@
   white-space: nowrap;
   min-width: 310px;
   border-bottom: 1px solid #f2f2f2;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
 }
 #top-nav.fixed {
   position: fixed;
@@ -60,6 +55,14 @@
 }
 #top-nav .navbar-toggle {
   margin: 3px 0 0 0;
+}
+#top-nav .navbar-toggle.hide-menu {
+  display: block;
+}
+@media (max-width: 767px) {
+  #top-nav .navbar-toggle.hide-menu {
+    display: none;
+  }
 }
 #top-nav .navbar-toggle .icon-bar {
   display: block;
@@ -308,11 +311,6 @@ aside {
   left: 0;
   background-color: #323447;
   height: 100%;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
 }
 aside::-webkit-scrollbar {
   width: 3px;
@@ -520,31 +518,31 @@ aside .main-menu > ul > li > a {
   font-size: 13px;
   padding: 13px 10px 13px 13px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
+  transition: color 0.5s ease, background 0.5s ease;
+  -webkit-transition: color 0.5s ease, background 0.5s ease;
+  -moz-transition: color 0.5s ease, background 0.5s ease;
+  -ms-transition: color 0.5s ease, background 0.5s ease;
+  -o-transition: color 0.5s ease, background 0.5s ease;
 }
 aside .main-menu > ul > li > a:hover,
 aside .main-menu > ul > li > a:focus {
   text-decoration: none;
   color: #ffffff;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
+  transition: color 0.5s ease, background 0.5s ease;
+  -webkit-transition: color 0.5s ease, background 0.5s ease;
+  -moz-transition: color 0.5s ease, background 0.5s ease;
+  -ms-transition: color 0.5s ease, background 0.5s ease;
+  -o-transition: color 0.5s ease, background 0.5s ease;
   background: #272938;
 }
 aside .main-menu > ul > li > a:hover .menu-hover,
 aside .main-menu > ul > li > a:focus .menu-hover {
   opacity: 1;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
 }
 aside .main-menu > ul > li > a .text {
   margin-left: 10px;
@@ -565,11 +563,11 @@ aside .main-menu > ul > li > a .menu-hover {
   bottom: -2px;
   left: 0px;
   width: 3px;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
 }
 aside .main-menu > ul > li .dropdown-menu {
   animation: fadeIn 0.8s ease;
@@ -606,6 +604,15 @@ aside .main-menu > ul > li .dropdown-menu {
 aside .main-menu > ul > li .submenu {
   display: none;
 }
+aside .main-menu > ul > li .submenu.third-level li a {
+  padding-left: 40px;
+}
+aside .main-menu > ul > li .submenu.fourth-level li a {
+  padding-left: 60px;
+}
+aside .main-menu > ul > li .submenu li {
+  position: relative;
+}
 aside .main-menu > ul > li .submenu li a {
   display: block;
   background-color: #383b50;
@@ -620,7 +627,7 @@ aside .main-menu > ul > li .submenu li a {
   -o-transition: all 0.4s ease;
 }
 aside .main-menu > ul > li .submenu li a .submenu-label {
-  display: block;
+  display: inline-block;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
@@ -721,11 +728,6 @@ aside .main-menu .alert {
 @media (min-width: 768px) {
   #wrapper.sidebar-mini #top-nav .brand {
     width: 90px;
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
   }
   #wrapper.sidebar-mini #top-nav .brand .text-toggle {
     display: none;
@@ -771,6 +773,10 @@ aside .main-menu .alert {
     -ms-animation: fadeIn 0.4s ease;
     -o-animation: fadeIn 0.4s ease;
   }
+  #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li:hover .submenu.third-level,
+  #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li:hover .submenu.fourth-level {
+    display: none;
+  }
   #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li > a {
     text-align: center;
     font-size: 11px;
@@ -812,6 +818,17 @@ aside .main-menu .alert {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
   }
+  #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li .submenu li {
+    position: relative;
+  }
+  #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li .submenu li:hover .submenu.third-level {
+    display: block;
+    animation: fadeIn 0.4s ease;
+    -webkit-animation: fadeIn 0.4s ease;
+    -moz-animation: fadeIn 0.4s ease;
+    -ms-animation: fadeIn 0.4s ease;
+    -o-animation: fadeIn 0.4s ease;
+  }
   #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li .submenu li a {
     background: #fff;
     text-align: left;
@@ -827,27 +844,25 @@ aside .main-menu .alert {
   #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li .submenu li a:hover .submenu-label {
     color: #222 !important;
   }
+  #wrapper.sidebar-mini aside .sidebar-inner .main-menu > ul > li .submenu.third-level li:hover .submenu.fourth-level {
+    display: block;
+    animation: fadeIn 0.4s ease;
+    -webkit-animation: fadeIn 0.4s ease;
+    -moz-animation: fadeIn 0.4s ease;
+    -ms-animation: fadeIn 0.4s ease;
+    -o-animation: fadeIn 0.4s ease;
+  }
   #wrapper.sidebar-mini aside .sidebar-inner .alert {
     display: none;
   }
   #wrapper.sidebar-mini #main-container,
   #wrapper.sidebar-mini footer {
     margin-left: 90px;
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
   }
 }
 @media (max-width: 767px) {
   #wrapper.sidebar-display aside {
     left: 0;
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
   }
   #wrapper.sidebar-display #top-nav {
     left: 0;
@@ -857,11 +872,15 @@ aside .main-menu .alert {
   #wrapper.sidebar-display footer {
     left: 194px;
     right: -194px;
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
+  }
+}
+@media (min-width: 768px) {
+  #wrapper.sidebar-hide aside {
+    left: -194px;
+  }
+  #wrapper.sidebar-hide #main-container,
+  #wrapper.sidebar-hide footer {
+    margin-left: 0;
   }
 }
 body {
@@ -1138,6 +1157,9 @@ a.list-group-item {
   line-height: 40px;
   font-weight: 600;
 }
+.gmnoprint img {
+  max-width: none;
+}
 .avatar {
   width: 60px;
 }
@@ -1160,11 +1182,11 @@ a.list-group-item {
   color: #ccc;
   margin-right: 20px;
   text-shadow: 0 1px 0 #fff;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
+  transition: color 0.2s ease;
+  -webkit-transition: color 0.2s ease;
+  -moz-transition: color 0.2s ease;
+  -ms-transition: color 0.2s ease;
+  -o-transition: color 0.2s ease;
 }
 .shortcut-link .shortcut-icon {
   position: relative;
@@ -1198,11 +1220,11 @@ a.list-group-item {
 .shortcut-link:hover {
   text-decoration: none;
   color: #626262;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
+  transition: color 0.2s ease;
+  -webkit-transition: color 0.2s ease;
+  -moz-transition: color 0.2s ease;
+  -ms-transition: color 0.2s ease;
+  -o-transition: color 0.2s ease;
 }
 .headline {
   margin: 20px 0;
@@ -1280,11 +1302,6 @@ a.list-group-item {
   min-height: 800px;
   padding-top: 45px;
   margin-left: 194px;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
 }
 @media (max-width: 480px) {
   #main-container {
@@ -2617,6 +2634,7 @@ footer hr {
 .panel .tool-bar {
   float: right;
   list-style: none;
+  margin-bottom: 0;
 }
 .panel .tool-bar li {
   display: inline-block;
@@ -2678,11 +2696,11 @@ footer hr {
   -moz-transform: scale(1.2);
   -ms-transform: scale(1.2);
   -o-transform: scale(1.2);
-  transition: all 0.4s ease;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  -ms-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
+  transition: transform 0.4s ease;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  -moz-transition: -moz-transform 0.4s ease;
+  -ms-transition: -ms-transform 0.4s ease;
+  -o-transition: -o-transform 0.4s ease;
 }
 .panel-stat1:hover .title {
   transform: scale(0.85);
@@ -2690,11 +2708,11 @@ footer hr {
   -moz-transform: scale(0.85);
   -ms-transform: scale(0.85);
   -o-transform: scale(0.85);
-  transition: all 0.4s ease;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  -ms-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
+  transition: transform 0.4s ease;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  -moz-transition: -moz-transform 0.4s ease;
+  -ms-transition: -ms-transform 0.4s ease;
+  -o-transition: -o-transform 0.4s ease;
 }
 .panel-stat1 .value {
   font-size: 60px;
@@ -2790,11 +2808,6 @@ footer hr {
   margin-bottom: 20px;
   color: #fff;
   cursor: pointer;
-  transition: all 0.4s ease;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  -ms-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
 }
 .panel-stat3 .stat-icon {
   position: absolute;
@@ -2847,7 +2860,7 @@ footer hr {
   width: 50%;
   float: left;
   text-align: center;
-  padding: 35px 10px 10px;
+  padding: 15px 10px 10px;
 }
 .panel-tab {
   background: #f9f9f9;
@@ -4314,11 +4327,6 @@ input[type="radio"]:active + .custom-radio {
   box-shadow: 0 3px 25px -4px rgba(0, 0, 0, 0.9);
   -moz-box-shadow: 0 3px 25px -4px rgba(0, 0, 0, 0.9);
   -webkit-box-shadow: 0 3px 25px -4px rgba(0, 0, 0, 0.9);
-  transform: scale(1.02);
-  -webkit-transform: scale(1.02);
-  -moz-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  -o-transform: scale(1.02);
   transition: all 0.4s ease;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
@@ -4975,6 +4983,55 @@ input[type="radio"]:active + .custom-radio {
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
+}
+#lockScreen {
+  display: table;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#lockScreen.in .modal-dialog {
+  transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+}
+#lockScreen .modal-dialog {
+  display: table-cell;
+  width: 270px !important;
+  vertical-align: middle;
+  transform: translate(0, -40px);
+  -webkit-transform: translate(0, -40px);
+  -moz-transform: translate(0, -40px);
+  -ms-transform: translate(0, -40px);
+  -o-transform: translate(0, -40px);
+}
+#lockScreen .modal-dialog .modal-content {
+  background-color: transparent;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  border: none;
+}
+#lockScreen .modal-dialog .modal-content .input-group {
+  width: 270px;
+  margin: 0 auto;
+}
+#lockScreen .lock-screen-img {
+  text-align: center;
+}
+#lockScreen .lock-screen-img img {
+  border-radius: 50em;
+  -moz-border-radius: 50em;
+  -webkit-border-radius: 50em;
+  width: 70px;
+  height: 70px;
 }
 .fc-event {
   background: #4dd4fd;

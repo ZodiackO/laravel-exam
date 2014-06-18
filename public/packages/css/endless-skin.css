@@ -88,6 +88,12 @@ aside.skin-1 .main-menu > ul > li > .submenu  li a:hover .submenu-label,
 aside.skin-1 .main-menu > ul > li > .submenu  li a:focus .submenu-label {
   color: #222;
 }
+aside.skin-1 .main-menu > ul > li > .submenu  li.active a{
+  background: #f9f9f9;
+}
+aside.skin-1 .main-menu > ul > li > .submenu  li.active a .submenu-label{
+  color: #555;
+}
 @media (max-width: 767px)   {
     aside.skin-1 .main-menu > ul > li > .dropdown-menu li a {
        color: #777;
@@ -216,6 +222,12 @@ aside.skin-2 .main-menu > ul > li > .submenu  li a .submenu-label{
 }
 aside.skin-2 .main-menu > ul > li > .submenu  li a:hover .submenu-label,
 aside.skin-2 .main-menu > ul > li > .submenu  li a:focus .submenu-label {
+  color: #fff;
+}
+aside.skin-2 .main-menu > ul > li > .submenu  li.active a{
+  background: #BD3F26;
+}
+aside.skin-2 .main-menu > ul > li > .submenu  li.active a .submenu-label{
   color: #fff;
 }
 @media (max-width: 767px)   {
@@ -348,6 +360,12 @@ aside.skin-3 .main-menu > ul > li > .submenu  li a:hover .submenu-label,
 aside.skin-3 .main-menu > ul > li > .submenu  li a:focus .submenu-label {
   color: #fff;
 }
+aside.skin-3 .main-menu > ul > li > .submenu  li.active a{
+  background: #396389;
+}
+aside.skin-3 .main-menu > ul > li > .submenu  li.active a .submenu-label{
+  color: #fff;
+}
 @media (max-width: 767px)   {
     aside.skin-3 .main-menu > ul > li > .dropdown-menu li a {
        color: #d6e8f7;
@@ -478,6 +496,12 @@ aside.skin-4 .main-menu > ul > li > .submenu  li a:hover .submenu-label,
 aside.skin-4 .main-menu > ul > li > .submenu  li a:focus .submenu-label {
   color: #fff;
 }
+aside.skin-4 .main-menu > ul > li > .submenu  li.active a{
+  background: #55473E;
+}
+aside.skin-4 .main-menu > ul > li > .submenu  li.active a .submenu-label{
+  color: #fff;
+}
 @media (max-width: 767px)   {
     aside.skin-4 .main-menu > ul > li > .dropdown-menu li a {
        color: #f7e4d7;
@@ -602,6 +626,12 @@ aside.skin-5 .main-menu > ul > li > .submenu  li a .submenu-label{
 }
 aside.skin-5 .main-menu > ul > li > .submenu  li a:hover .submenu-label,
 aside.skin-5 .main-menu > ul > li > .submenu  li a:focus .submenu-label {
+  color: #fff;
+}
+aside.skin-5 .main-menu > ul > li > .submenu  li.active a{
+  background: #222;
+}
+aside.skin-5 .main-menu > ul > li > .submenu  li.active a .submenu-label{
   color: #fff;
 }
 @media (max-width: 767px)   {

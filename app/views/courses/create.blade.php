@@ -1,8 +1,8 @@
-@extends('layouts.scaffold')
+@extends('layouts.exam_endless')
 
 @section('main')
 
-<h1>Create Member</h1>
+<h1>Create Course</h1>
 
 {{ Form::open(array('route' => 'courses.store','class'=>'form-horizontal no-margin')) }}
 	<div class="col-md-6">

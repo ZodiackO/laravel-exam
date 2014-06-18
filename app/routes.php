@@ -16,6 +16,23 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+	
+
+	Route::post('duplicate/store',array(
+		'as' => 'duplicate',
+		'uses' => 'DuplicateController@store'
+	));
+
+	Route::get('archive/exam',array(
+		'as' => 'archiveExam',
+		'uses' => 'ExamarchiveController@exam'
+	));
+	Route::get('archive/{exid}',array(
+		'as' => 'archive',
+		'uses' => 'ExamarchiveController@index'
+	));
+	Route::resource('archive', 'ExamarchiveController');
+
 	Route::resource('command','CommandsController');
 
 	Route::get('choice/create/',array(
@@ -30,6 +47,10 @@ Route::get('/', function()
 	));
 	Route::resource('writting','WrittingsController');
 
+	Route::post('section/storem/', array(
+		'as' => 'section-storem',
+		'uses' => 'SectionsController@storem'
+	));
 	Route::get('section/create/',array(
 		'as' => 'section-create',
 		'uses' => 'SectionsController@create'

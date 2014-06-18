@@ -9,7 +9,7 @@ aside   {
     left: 0;  
     background-color: @sidebar-color;
     height: 100%;
-    .transition(all 0.5s ease);
+    //.transition(width 0.5s ease);
 
     &::-webkit-scrollbar {
         width: 3px;
@@ -179,16 +179,16 @@ aside   {
                     font-size: 13px;
                     padding: 13px 10px 13px 13px;   
                     text-shadow: 0 1px 1px rgba(0,0,0,0.05);
-                    .transition(all 0.5s ease);
+                    .transition(color 0.5s ease,background 0.5s ease);
                     
                     &:hover ,&:focus {
                         text-decoration: none;
                         color: @sidebar-font-hover;
-                        .transition(all 0.5s ease);
+                        .transition(color 0.5s ease,background 0.5s ease);
                         background: darken(@sidebar-color,5%);
                         .menu-hover {
                             opacity: 1;
-                            .transition(all 0.5s ease);
+                            .transition(opacity 0.5s ease);
                         }
                     }
                     
@@ -211,7 +211,7 @@ aside   {
                         bottom: -2px;
                         left: 0px;
                         width: 3px;
-                        .transition(all 0.5s ease);
+                        .transition(opacity 0.5s ease);
                     }
                 }
                 
@@ -247,8 +247,25 @@ aside   {
                 .submenu    {
                     display: none;   
                     
+                    &.third-level   {
+                        li  {
+                            a   {
+                                padding-left: 40px;
+                            }
+                        }
+                    }
+                    
+                    &.fourth-level   {
+                        li  {
+                            a   {
+                                padding-left: 60px;
+                            }
+                        }
+                    }
+                    
                     li  {
-                         
+                        position: relative;
+                        
                         a   {
                             display: block;
                             background-color : lighten(@sidebar-color,3%);
@@ -259,7 +276,7 @@ aside   {
                             .transition(all 0.4s ease);
                             
                             .submenu-label    {
-                                display:block;  
+                                display: inline-block;  
                                 .transition(all 0.2s ease);
                             }
                             

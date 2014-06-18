@@ -38,6 +38,22 @@
     -o-transition: @value;   
 }
 
+.transition(@value1 ,@value2) {
+    transition: @value1, @value2;   
+    -webkit-transition: @value1, @value2;   
+    -moz-transition: @value1, @value2;   
+    -ms-transition: @value1, @value2;   
+    -o-transition: @value1, @value2;   
+}
+
+.transition-transform(@value) {
+    transition: transform @value;
+    -webkit-transition: -webkit-transform @value;
+    -moz-transition: -moz-transform @value;
+    -ms-transition: -ms-transform @value;
+    -o-transition: -o-transform @value;
+}
+
 .transition-delay(@value) {
     transition-delay: @value;   
     -webkit-transition-delay: @value;   

@@ -1,15 +1,12 @@
-@extends('layouts.scaffold')
+@extends('layouts.exam_endless')
 
 @section('main')
-
-<h1>Create Exam</h1>
-{{$course = Input::get('courseid')}}
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading"><h1>Create Exam</h1></div>
+{{	$course = Input::get('courseid')}}
 {{ Form::open(array('route' => array('examination.store','courseid'=>$course), 'class'=>'form-horizontal no-margin form-border')) }}
 
-        
-        <div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">Simple Form</div>
 				<div class="panel-body">
 		            <div class="form-group">
 						<label class="col-lg-1 control-label">ช้อสอบ</label>
