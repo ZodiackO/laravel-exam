@@ -11,7 +11,8 @@ class QuestionsController extends \BaseController {
 	{
 		$secid = Input::get('secid');
 		$exid = Input::get('exid');
-/*
+		$examtype = Input::get('examtype');
+/*		
 		$questions = DB::table('question')
 			->join('writting', 'question.qid', '=', 'writting.qid')
 			->where('exid', '=', $exam)
@@ -25,7 +26,7 @@ class QuestionsController extends \BaseController {
 		//return $exam;
 		//return $questions;
 		//return View::make('questions.index', compact(array('questions','exam', 'score','totalscore')));
-		return View::make('questions.index', compact(array('secid', 'exid')));
+		return View::make('questions.index', compact(array('secid', 'exid', 'examtype')));
 	}
 
 	/**

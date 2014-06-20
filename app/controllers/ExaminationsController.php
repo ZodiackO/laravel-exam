@@ -12,8 +12,10 @@ class ExaminationsController extends \BaseController {
 	public function index($course)
 	{
 
-		$examinations = Examination::where('courseid','=',$course)->get();
-		return View::make('examinations.index', compact(array('examinations','course')));
+		$examgenerals = Examination::where('courseid','=',$course)->where('extype', '=', 'general')->get();
+		$examonlines = Examination::where('courseid','=',$course)->where('extype', '=', 'online')->get();
+
+		return View::make('examinations.index', compact(array('examgenerals', 'examonlines','course')));
 		//$examinations = Examination::all();
 		//return View::make('examinations.index', compact('examinations'));
 	}
@@ -23,13 +25,26 @@ class ExaminationsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+	public function before_create()
+	{
+		$courseid = Input::get('courseid');
+
+		return View::make('examinations.beforecre', compact('courseid'));
+	}
+
 	public function create()
 	{
 		//$coursecurr = $course;
-		$commands = Command::where('tid', '=', null)->get();
+		$commands = Command::where('tid', '=', null)->where('examtype', '=', 'g')->get();
 		return View::make('examinations.create', compact('commands'));
 	}
 
+	public function create_online()
+	{
+		$courseid = Input::get('courseid');
+		$commands = Command::where('tid', '=', null)->where('examtype', '=', 'o')->get();
+		return View::make('examinations.create_online', compact('commands', 'courseid'));
+	}
 	/**
 	 * Store a newly created examination in storage.
 	 *
@@ -38,17 +53,22 @@ class ExaminationsController extends \BaseController {
 	public function store()
 	{
 		//return Input::all();
-		$command_str = implode(',', Input::get('command')); //array to string
+		$command = Input::get('command');
+		
 		
 		$course = Input::get('courseid');
 		$validator = Validator::make($data = Input::all(), Examination::$rules);
-		$data['command'] = $command_str;
+		if(sizeof($command) != 0){
+			$command_str = implode(',', $command); //array to string
+			$data['command'] = $command_str;
+		}
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
 		//Examination::create(array($data, 'courseid'=>$course));
+		//return $data;
 		Examination::create($data);
 		//return Redirect::route('examination.index',array($course));
 		return Redirect::to('examination/'.$course.'/')

@@ -73,7 +73,7 @@
 		             	</div>
 	             	</div><!--From group-->
 						             	
-
+	             	<input type="hidden" name="qtype" value="w">
 					<div class="form-group">
 						<label class="col-lg-1 control-label">
 							{{ Form::submit('Submit', array('class' => 'btn btn-info')) }}

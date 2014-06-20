@@ -40,8 +40,8 @@ class CommandsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		//return $data;
-		Command::create($data);
-		$commands = Command::all();
+		$commandcre = Command::create($data);
+		$commands = Command::where('tid', '=', null)->where('examtype', '=', $commandcre->examtype)->get();
 		//return $commands->toJson();
 		return $commands;
 		//return Redirect::route('commands.index');

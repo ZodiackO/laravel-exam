@@ -16,7 +16,15 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
-	
+	Route::get('exams/doexam/',array(
+		'as' => 'exams-do',
+		'uses' => 'ExamController@doexam'
+	));
+	Route::get('exams/detail/',array(
+		'as' => 'exams-detail',
+		'uses' => 'ExamController@showdetail'
+	));
+	Route::resource('exams', 'ExamController');
 
 	Route::post('duplicate/store',array(
 		'as' => 'duplicate',
@@ -66,9 +74,19 @@ Route::get('/', function()
 		'uses' => 'ExportController@export'
 	));
 	
+	Route::get('examination/create_online/',array(
+		'as' => 'exam-create-online',
+		'uses' => 'ExaminationsController@create_online'
+	));
+
 	Route::get('examination/create/',array(
 		'as' => 'exam-create',
 		'uses' => 'ExaminationsController@create'
+	));
+
+	Route::get('examination/before_create/',array(
+		'as' => 'exam-before_create',
+		'uses' => 'ExaminationsController@before_create'
 	));
 
 	Route::get('examination/{course}/',array(

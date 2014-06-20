@@ -37,7 +37,7 @@
 									</td>
 									<td>
 										{{ Form::open(array('method' => 'DELETE', 'route' => array('section.destroy', $section->secid))) }}
-											{{ link_to_route('question', 'Add', array('secid'=>$section->secid, 'exid'=>$exam), array('class' => 'btn btn-success')) }}
+											{{ link_to_route('question', 'Add', array('secid'=>$section->secid, 'exid'=>$exam, 'examtype'=>$examtype), array('class' => 'btn btn-success')) }}
 				                    		{{ link_to_route('section.edit', 'Edit', array($section->secid), array('class' => 'btn btn-info')) }}
 				                            {{ Form::submit('Delete', array('class' => 'btn btn-sm btn-danger')) }}
 				                        {{ Form::close() }}

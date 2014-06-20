@@ -14,6 +14,14 @@ class ChoicesController extends \BaseController {
 		return View::make('choices.index', compact('choices'));
 	}
 
+	public static function select($qid)
+	{
+		$choice = Choice::where('qid', '=', $qid)->first();
+		$selections = Selection::where('cid', '=', $choice->cid)->get();
+
+		return $selections;
+	}
+
 	/**
 	 * Show the form for creating a new choice
 	 *

@@ -35,9 +35,11 @@ class SectionsController extends \BaseController {
 		$question = new QuestionsController();
 
 		$score = $question->checkscore($exam);
-		$totalscore = Examination::find($exam)->score;
+		$examination = Examination::find($exam);
+		$totalscore = $examination->score;
+		$examtype = $examination->extype;
 
-		return View::make('sections.index', compact(array('sections','exam', 'score','totalscore', 'm_questions', 'course')));
+		return View::make('sections.index', compact(array('sections','exam', 'score','totalscore', 'examtype', 'm_questions', 'course')));
 	}
 
 	/**

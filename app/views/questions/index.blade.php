@@ -6,6 +6,7 @@
 
 
 <a href="choice/create?secid={{$secid}}&exid={{$exid}}" class="btn btn-default quick-btn"><i class="fa fa-circle-o"></i><span>Choice</span></a>
-<a href="writting/create?secid={{$secid}}&exid={{$exid}}" class="btn btn-default quick-btn"><i class="fa fa-pencil"></i><span>Writing</span></a>
-
+@if($examtype != 'online')
+	<a href="writting/create?secid={{$secid}}&exid={{$exid}}" class="btn btn-default quick-btn"><i class="fa fa-pencil"></i><span>Writing</span></a>
+@endif
 @stop

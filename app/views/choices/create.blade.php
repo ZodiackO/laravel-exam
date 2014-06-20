@@ -77,7 +77,7 @@
 
 		             	</div>
 	             	</div><!--From group-->
-	             	
+	             	<input type="hidden" name="qtype" value="c">
 
 					<div class="form-group">
 						<label class="col-lg-1 control-label">
