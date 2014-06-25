@@ -40,9 +40,22 @@
 						</tr>
 
 					</table>
+					<table class="table">
+						<tr>
+							<th>Top Score</th>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
 				</div>
 			</div>
-			<p><a href="{{ URL::route('exams-do',array('exid' => $examination->exid, 'exsubject' => $examination->subject)) }}" class="btn btn-sm btn-success">Take</a></p>
+			<p><a href="{{ URL::route('exams-do',array('exid' => $examination->exid, 'exsubject' => $examination->subject, 'avg_level' => $avg_level)) }}" class="btn btn-sm btn-success">Take</a></p>
 		</div><!-- /.padding-md -->
 	</div>
 </div>

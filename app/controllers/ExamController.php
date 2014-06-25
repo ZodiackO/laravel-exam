@@ -22,6 +22,20 @@ class ExamController extends \BaseController {
 	{
 		$exid = Input::get('exid');
 		$avg_level = Input::get('avg_level');
+		$mid = '10';
+		//$arr2 = array('nickname' => 'o');
+		//$arr = array(array('name' => 'gg', 'age' => '16'));
+		//array_push($arr,$arr2);
+		//$mer = array(array_merge($arr['0'],$arr2));
+/*
+		$memdoexam = DB::table('memberdoexamquestion')
+			->join('examination', 'examination.exid', '=', 'memberdoexamquestion.exid')
+			->where('memberdoexamquestion.exid', '=', $exid)
+			->groupBy('memberdoexamquestion.mid','memberdoexamquestion.exid','memberdoexamquestion.num_times')
+			->select(array('memberdoexamquestion.mid','memberdoexamquestion.timetake',DB::raw('sum(memberdoexamquestion.score) as totalscore')))
+			->orderBy('totalscore','desc')
+			->get();*/
+			//return $memdoexam;
 		//$examinations = Examination::where('exid', '=', $exid)->get();
 		$examination = Examination::find($exid);
 		return View::make('exams.examdetail', compact('examination', 'avg_level'));
@@ -29,6 +43,7 @@ class ExamController extends \BaseController {
 
 	public function doexam()
 	{
+		$avg_level = Input::get('avg_level');
 		$exid = Input::get('exid');
 		$exsubject = Input::get('exsubject');
 		$examinations = DB::table('examination')
@@ -39,7 +54,81 @@ class ExamController extends \BaseController {
 			->get();
 
 		//return $examinations;
-		return View::make('exams.examdo', compact('examinations', 'exsubject'));
+		return View::make('exams.examdo', compact('examinations', 'exsubject', 'exid', 'avg_level'));
+	}
+
+	public function checkanswer()
+	{
+		$avg_level = Input::get('avg_level');
+		$exid = Input::get('exid');
+		$timetake = Input::get('timetake');
+
+		//$memid = Session::get('user')['MID'];
+		$memid = '10';
+		$memdoex = Memberdoexamquestion::where('mid', '=', $memid)
+			->where('exid', '=',$exid)
+			->orderBy('num_times','desc')
+			->first();
+		$currtimes = $memdoex ? $memdoex->num_times + 1 : 1;
+
+		$exam = Examination::find($exid);
+
+		$questid = Input::get('question');
+		$questid = explode(',', $questid);
+		$answers = Choice::whereIn('qid',$questid)->select('qid','answer')->get();
+
+		$result = '';
+		$points = 0;
+		$timefin = '';
+
+		foreach ($answers as $answer) {
+			$score = '';
+			$reply = Input::get('q'.$answer->qid);
+			if($reply != ''){
+				if($answer->answer == $reply){
+					$qt = Question::find($answer->qid);
+					$score = $qt->score;
+					$points += $qt->score;
+					$result = 'correct';
+					//return 'correct';
+				}else{
+					$score = 0;
+					$result = 'wrong';
+					//return 'wrong';
+				}
+			}else{
+				$result = 'null';
+			}
+
+			$mdxq = Memberdoexamquestion::create(array(
+				'mid' => $memid, 
+				'exid' => $exid, 
+				'qid' => $answer->qid,
+				'result' => $result,
+				'score' => $score,
+				'timetake' => $timetake,
+				'num_times'=> $currtimes
+			));
+			$timefin = $mdxq->created_at;
+		}
+		$res = $points < $exam->scorepass ? 'Fail':'Pass';
+		$arrdata = array(
+			'exsubject' => $exam->subject,
+			'result' => $res,
+			'mark' => $points,
+			'totalscore' => $exam->score,
+			'timetake' => $timetake,
+			'timefin' => $timefin,
+			'avg_level' => $avg_level
+		);
+
+
+		return View::make('exams.examresult', compact('arrdata'));
+	}
+
+	public function runnum()
+	{
+
 	}
 
 	public function create()

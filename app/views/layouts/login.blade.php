@@ -16,6 +16,7 @@
     	{{ HTML::style('packages/css/endless.css')}}
     	{{ HTML::style('packages/css/endless-skin.css')}}
     	{{ HTML::style('packages/css/font-awesome.in.css')}}
+    	<script src="packages/js/jquery-1.10.2.min.js"></script>
 	</head>
 
 	<body>

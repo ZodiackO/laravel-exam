@@ -13,10 +13,12 @@ class AccountController extends \BaseController {
 	}
 
 	public function getLogin() {
+	    //return View::make('account.test_login');
 	    return View::make('account.login');
 	}
 
 	public function postLogin(){
+		//return Auth::attempt(array('username'=>Input::get('username'), 'password'=>Input::get('password')));
 		if (Auth::attempt(array('username'=>Input::get('username'), 'password'=>Input::get('password')))) {
 
 		    return Redirect::to('courses/')->with('message', 'Hello'.Auth::user()->name);

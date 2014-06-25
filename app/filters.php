@@ -36,6 +36,11 @@ App::after(function($request, $response)
 Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::guest('account/login');
+	/*
+	if(empty(Session::get('user'))){
+		return Redirect::to('login');
+	}
+	*/
 });
 
 
@@ -58,6 +63,11 @@ Route::filter('auth.basic', function()
 Route::filter('guest', function()
 {
 	if (Auth::check()) return Redirect::to('/courses/');
+	/*
+	if(!empty(Session::get('user'))){
+		return Redirect::to('/');
+	}
+	*/
 });
 
 /*
@@ -76,5 +86,12 @@ Route::filter('csrf', function()
 	if (Session::token() != Input::get('_token'))
 	{
 		throw new Illuminate\Session\TokenMismatchException;
+	}
+});
+
+Route::filter('teacher', function()
+{
+	if(Session::get('user')['Status'] != 'Teacher'){
+		return Redirect::to('/exam/');
 	}
 });

@@ -22,7 +22,8 @@
 				</div>
 				<div class="panel-body">
 
-					{{Form::open(array('route'=>'account-login-post','class'=>'form-login'))}}
+
+					<form method="post" action="" class="form-login" id="fmtlogin">
 						<div class="form-group">
 							<label>Username</label>
 							{{ Form::text('username', null, array('class'=>'form-control input-sm bounceIn animation-delay2', 'placeholder'=>'Username')) }}
@@ -48,9 +49,10 @@
 						</div>
 
 						<hr/>
-							{{ Form::submit('Login', array('class'=>'btn btn-success btn-sm bounceIn animation-delay5 login-link pull-right'))}}
+							{{ Form::submit('Login', array('class'=>'btn btn-success btn-sm'))}}
 						<!--a class="btn btn-success btn-sm bounceIn animation-delay5 login-link pull-right" href="index.html"><i class="fa fa-sign-in"></i> Sign in</a-->
-					{{Form::close()}}
+					</form>
+
 
 				</div>
 			</div><!-- /panel -->
@@ -59,7 +61,36 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
+
+			$("#fmtlogin").submit(function(e){
+				alert('ggg');
+				e.preventDefault();
+				var $form = $(this),
+				   user = $form.find("input[name='username']").val(),
+				   pass = $form.find("input[name='password']").val();
+				   //url = $form.attr("action");
+
+				   var posting = $.post('http://www.dedpu.com/Profile/check_login.php',{
+				   		Username: user,
+				   		Password: pass
+				   	});
+
+				   	posting.done(function(data){
+				   		console.log('time1: '+data);
+				   		var obj = JSON.parse(data);
+				   		console.log(obj);
+				   		var postaf = $.post('{{URL::route("login-post")}}',{
+				   			data: obj
+				   		});
+				   		postaf.done(function(data){
+				   			console.log(data);
+				   			window.location.href = data;
+				   		});
+					});
+					posting.fail(function(){
+						alert('fail');
+					});
+			});
 		});
 	</script>
 @stop

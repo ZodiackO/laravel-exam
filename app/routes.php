@@ -16,6 +16,31 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+	Route::get('service/historyexam/',array(
+		'as' => 'service-historyexam',
+		'uses' => 'ServiceController@aum'
+	));
+	Route::post('service/historyexam/',array(
+		'as' => 'service-historyexam',
+		'uses' => 'ServiceController@aum'
+	));
+	Route::get('service/highscore/', array(
+		'as' => 'service-highscore',
+		'uses' => 'ServiceController@highscore'
+	));
+	Route::get('service/test/', array(
+		'as' => 'service-test',
+		'uses' => 'ServiceController@test'
+	));
+	Route::post('service/test/', array(
+		'as' => 'service-test',
+		'uses' => 'ServiceController@test'
+	));
+
+	Route::post('exams/checkanswer/', array(
+		'as' => 'exams-checkans',
+		'uses' => 'ExamController@checkanswer'
+	));
 	Route::get('exams/doexam/',array(
 		'as' => 'exams-do',
 		'uses' => 'ExamController@doexam'
@@ -23,6 +48,10 @@ Route::get('/', function()
 	Route::get('exams/detail/',array(
 		'as' => 'exams-detail',
 		'uses' => 'ExamController@showdetail'
+	));
+	Route::get('exams/',array(
+		'as' => 'exams',
+		'uses' => 'ExamController@index'
 	));
 	Route::resource('exams', 'ExamController');
 
@@ -119,7 +148,11 @@ Route::group(array('before' => 'auth'), function() {
 Route::group(array('before' => 'guest'), function() {
 
 	Route::group(array('before' => 'csrf'), function (){
-
+/*
+		Route::post('/account/login', array(
+			'as' => 'account-login-post',
+			'uses' => 'AccountController@postLogin'
+		));*/
 		Route::post('/account/login', array(
 			'as' => 'account-login-post',
 			'uses' => 'AccountController@postLogin'
@@ -132,3 +165,15 @@ Route::group(array('before' => 'guest'), function() {
 	));
 	
 });
+Route::get('login',array(
+		'as' => 'login',
+		'uses' => 'LoginController@index'
+	));
+Route::post('login',array(
+	'as' => 'login-post',
+	'uses' => 'LoginController@login'
+));
+Route::get('test',array(
+		'as' => 'test',
+		'uses' => 'TestController@index'
+));
